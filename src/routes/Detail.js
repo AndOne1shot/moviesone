@@ -24,6 +24,7 @@ function Detail() {
     <div>
       <h1>Detail</h1>
       <span>{movie.title}</span>
+      <span>{movie.title}</span>
     </div>
   );
 }
