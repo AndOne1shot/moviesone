@@ -31,6 +31,7 @@ function Home() {
               coverImg={movie.medium_cover_image}
               title={movie.title}
               genres={movie.genres}
+              rating={movie.rating}
             />
           ))}
         </div>

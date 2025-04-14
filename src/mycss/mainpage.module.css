@@ -41,3 +41,10 @@
 .link:visited {
   color: white;
 }
+
+.title {
+  margin-top: 10px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
