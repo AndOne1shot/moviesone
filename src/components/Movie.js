@@ -8,8 +8,10 @@ function Movie({ id, coverImg, title, rating }) {
       <div className={styles.container}>
         <img src={coverImg} alt={title} className={styles.poster} />
         <div className={styles.title}>
-          <span>{title}</span>
-          <span>{rating}</span>
+          <span style={{ width: "75%" }}>{title}</span>
+          <span style={{ width: "20%" }}>
+            {rating >= 8 ? "🟢" : rating >= 5 ? "🟡" : "🔴"} {rating}
+          </span>
         </div>
       </div>
     </Link>

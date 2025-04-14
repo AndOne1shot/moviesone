@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   gap: 20px;
   max-width: 1280px;
-  margin-top: 100px;
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   justify-content: center; /* 수평 중앙 정렬 */
@@ -12,7 +12,7 @@
 
 .container {
   flex: 0 0 calc(25% - 15px);
-  height: 400px;
+  height: 450px;
   display: flex;
   width: 300px;
   margin-bottom: 20px;
