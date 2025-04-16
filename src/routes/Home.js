@@ -42,12 +42,11 @@ function Home() {
   const [movies, setMovies] = useState([]);
 
   const getMovies = async () => {
-    const json = await (
-      await fetch(
-        "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year"
-      )
-    ).json();
-    setMovies(json.data.movies);
+    const apiKey = process.env.REACT_APP_TMDB_API_KEY;
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-KR&page=1`;
+    const response = await fetch(url);
+    const json = await response.json();
+    setMovies(json.results);
     setLoading(false);
   };
 
@@ -86,10 +85,14 @@ function Home() {
             <div key={movie.id}>
               <Movie
                 id={movie.id}
-                coverImg={movie.medium_cover_image}
+                coverImg={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    : ""
+                }
                 title={movie.title}
-                genres={movie.genres}
-                rating={movie.rating}
+                genres={movie.genre_ids}
+                rating={movie.vote_average}
               />
             </div>
           ))}

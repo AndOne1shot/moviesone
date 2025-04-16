@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import styles from "../mycss/mainpage.module.css";
 
 function Movie({ id, coverImg, title, rating }) {
+  const rate = Math.round(rating * 10);
   return (
     <div className={styles.container}>
       <Link to={`/movie/${id}`} className={styles.link}>
         <img src={coverImg} alt={title} className={styles.poster} />
         <div className={styles.title}>
-          <span style={{ width: "75%" }}>{title}</span>
-          <span style={{ width: "20%", textAlign: "right" }}>
-            {rating >= 8 ? "🟢" : rating >= 5 ? "🟡" : "🔴"} {rating}
+          <span style={{ width: "70%" }}>{title}</span>
+          <span style={{ width: "30%", textAlign: "right" }}>
+            {rate >= 80 ? "🟢" : rate >= 50 ? "🟡" : "🔴"} {rate}
           </span>
         </div>
       </Link>
