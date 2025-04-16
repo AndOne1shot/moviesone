@@ -5,6 +5,38 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+function PrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        height: "60px", // 원하는 높이만 지정
+      }}
+      onClick={onClick}
+    >
+      ▶
+    </div>
+  );
+}
+
+function NextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        height: "60px", // 원하는 높이만 지정
+      }}
+      onClick={onClick}
+    >
+      ▶
+    </div>
+  );
+}
+
 function Home() {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
@@ -30,6 +62,8 @@ function Home() {
     slidesToShow: 5,
     slidesToScroll: 5,
     arrows: true,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
   };
 
   return (
