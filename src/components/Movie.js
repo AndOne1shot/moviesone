@@ -4,17 +4,17 @@ import styles from "../mycss/mainpage.module.css";
 
 function Movie({ id, coverImg, title, rating }) {
   return (
-    <Link to={`/movie/${id}`} className={styles.link}>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <Link to={`/movie/${id}`} className={styles.link}>
         <img src={coverImg} alt={title} className={styles.poster} />
         <div className={styles.title}>
           <span style={{ width: "75%" }}>{title}</span>
-          <span style={{ width: "20%" }}>
+          <span style={{ width: "20%", textAlign: "right" }}>
             {rating >= 8 ? "🟢" : rating >= 5 ? "🟡" : "🔴"} {rating}
           </span>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 

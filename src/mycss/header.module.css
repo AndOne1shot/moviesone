@@ -1,7 +1,13 @@
 .main_bar {
   height: 150px;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
   color: white;
+  max-width: 1280px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 600;
 }
