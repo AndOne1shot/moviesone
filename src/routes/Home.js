@@ -69,7 +69,17 @@ function Home() {
   return (
     <div>
       {loading ? (
-        <h1>Loading...</h1>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <span style={{ color: "white", fontSize: "40px", fontWeight: "600" }}>
+            Loading...
+          </span>
+        </div>
       ) : (
         <Slider {...settings} className={styles.flex_container}>
           {movies.map((movie) => (
