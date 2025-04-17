@@ -106,20 +106,25 @@ function Home() {
               개봉예정 영화
             </span>
             <Slider {...settings} className={styles.flex_container}>
-              {upcomeMovies.map((upcomemovie) => (
-                <div key={upcomemovie.id}>
-                  <UpcomeMovie
-                    id={upcomemovie.id}
-                    coverImg={
-                      upcomemovie.poster_path
-                        ? `https://image.tmdb.org/t/p/w500${upcomemovie.poster_path}`
-                        : ""
-                    }
-                    title={upcomemovie.title}
-                    release_date={upcomemovie.release_date}
-                  />
-                </div>
-              ))}
+              {upcomeMovies
+                .slice()
+                .sort(
+                  (a, b) => new Date(a.release_date) - new Date(b.release_date)
+                )
+                .map((upcomemovie) => (
+                  <div key={upcomemovie.id}>
+                    <UpcomeMovie
+                      id={upcomemovie.id}
+                      coverImg={
+                        upcomemovie.poster_path
+                          ? `https://image.tmdb.org/t/p/w500${upcomemovie.poster_path}`
+                          : ""
+                      }
+                      title={upcomemovie.title}
+                      release_date={upcomemovie.release_date}
+                    />
+                  </div>
+                ))}
             </Slider>
           </div>
 

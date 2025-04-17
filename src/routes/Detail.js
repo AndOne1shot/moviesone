@@ -66,44 +66,58 @@ function Detail() {
 
   return (
     <div className={styles.detail_container}>
-      <img
-        src={
-          item.poster_path
-            ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-            : ""
-        }
-        alt={type === "series" ? item.name : item.title}
-        className={styles.poster}
-      />
-      <div style={{ width: "900px" }}>
-        <span style={{ fontSize: "36px", fontWeight: "600", color: "white" }}>
-          {type === "series" ? item.name : item.title} (
-          {(item.first_air_date || item.release_date)?.slice(0, 4)})
-        </span>
-        <div style={{ margin: "10px 0", color: "white" }}>
-          <strong>감독:</strong> {director || "정보 없음"}
-        </div>
-        <div>
-          <strong style={{ color: "white" }}>출연진:</strong>
-          {cast && cast.length > 0 ? (
-            <ul>
-              {cast.map((actor) => (
-                <li
-                  key={actor.cast_id || actor.name}
-                  style={{ color: "white", marginBottom: "8px" }}
-                >
-                  <strong>{actor.name}</strong> as {actor.character}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <span style={{ color: "gray" }}>출연진 정보가 없습니다.</span>
-          )}
+      <div
+        className={styles.backdrop_img}
+        style={{
+          "--bg-url": item.backdrop_path
+            ? `url(https://image.tmdb.org/t/p/w1280${item.backdrop_path})`
+            : "none",
+        }}
+      >
+        <img
+          src={
+            item.poster_path
+              ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+              : ""
+          }
+          alt={type === "series" ? item.name : item.title}
+          className={styles.poster}
+        />
+        <div style={{ width: "900px" }}>
+          <span style={{ fontSize: "36px", fontWeight: "600", color: "white" }}>
+            {type === "series" ? item.name : item.title} (
+            {(item.first_air_date || item.release_date)?.slice(0, 4)})
+          </span>
+          <div style={{ margin: "10px 0", color: "white" }}>
+            <strong>감독:</strong> {director || "정보 없음"}
+          </div>
+          <div>
+            <strong style={{ color: "white" }}>출연진:</strong>
+            {cast && cast.length > 0 ? (
+              <ul>
+                {cast.map((actor) => (
+                  <li
+                    key={actor.cast_id || actor.name}
+                    style={{ color: "white", marginBottom: "8px" }}
+                  >
+                    <span>{actor.name}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <span style={{ color: "gray" }}>출연진 정보가 없습니다.</span>
+            )}
+          </div>
         </div>
       </div>
       <div style={{ color: "white", marginTop: "20px" }}>
         <strong>줄거리:</strong>
-        <div>{item.overview || "줄거리 정보가 없습니다."}</div>
+        <br />
+        <span>{item.overview || "줄거리 정보가 없습니다."}</span>
+        <hr style={{ marginTop: "30px" }} />
+        <ul className={styles.movie_info}>
+          <li></li>
+        </ul>
       </div>
     </div>
   );

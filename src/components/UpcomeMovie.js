@@ -13,8 +13,6 @@ function UpcomeMovie({
   const target = new Date(release_date);
   today.setHours(0, 0, 0, 0);
   target.setHours(0, 0, 0, 0);
-  console.log("오늘" + today);
-  console.log("개봉일" + target);
 
   const d_day = Math.floor((target - today) / (1000 * 60 * 60 * 24));
 
@@ -33,5 +31,13 @@ function UpcomeMovie({
     </div>
   );
 }
+
+UpcomeMovie.propTypes = {
+  id: PropTypes.number.isRequired,
+  coverImg: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  summary: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default UpcomeMovie;

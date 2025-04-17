@@ -13,3 +13,50 @@
   height: 400px;
   border-radius: 10px;
 }
+
+.backdrop_img {
+  position: relative; /* 반드시 추가! */
+  width: 1280px;
+  height: 500px;
+  border-style: none;
+  border-color: black;
+  display: flex;
+  gap: 50px;
+}
+
+.backdrop_img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-url); /* 또는 background-image: ... */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.backdrop_img > * {
+  position: relative;
+  z-index: 1;
+}
+
+.movie_info {
+  list-style: none; /* 기본 점 제거 */
+  padding: 0;
+  margin: 0;
+  width: 400px;
+}
+
+.movie-info li {
+  display: flex; /* 한 줄에 label과 값 나란히 */
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #222; /* 구분선 */
+}
+
+.movie-info li strong {
+  width: 100px; /* label 너비 고정 */
+  font-weight: bold;
+}
