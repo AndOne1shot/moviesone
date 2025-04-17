@@ -40,19 +40,26 @@ function NextArrow(props) {
 function Home() {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
-
-  const getMovies = async () => {
-    const apiKey = process.env.REACT_APP_TMDB_API_KEY;
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-KR&page=1`;
-    const response = await fetch(url);
-    const json = await response.json();
-    setMovies(json.results);
-    setLoading(false);
-  };
+  const [series, setSeries] = useState([]);
+  const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
   useEffect(() => {
-    getMovies();
-  }, []);
+    const getMovies = async () => {
+      const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-KR&page=1`;
+      const response = await fetch(url);
+      const json = await response.json();
+      setMovies(json.results);
+    };
+
+    const getSeries = async () => {
+      const url = `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=ko-KR&page=1`;
+      const response = await fetch(url);
+      const json = await response.json();
+      setSeries(json.results);
+    };
+
+    Promise.all([getMovies(), getSeries()]).then(() => setLoading(false));
+  }, [apiKey]);
 
   const settings = {
     dots: false,
@@ -80,23 +87,52 @@ function Home() {
           </span>
         </div>
       ) : (
-        <Slider {...settings} className={styles.flex_container}>
-          {movies.map((movie) => (
-            <div key={movie.id}>
-              <Movie
-                id={movie.id}
-                coverImg={
-                  movie.poster_path
-                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                    : ""
-                }
-                title={movie.title}
-                genres={movie.genre_ids}
-                rating={movie.vote_average}
-              />
-            </div>
-          ))}
-        </Slider>
+        <div className={styles.flex_container}>
+          <span style={{ fontSize: "32px", color: "white", fontWeight: "600" }}>
+            영화
+          </span>
+          <Slider {...settings} className={styles.flex_container}>
+            {movies.map((movie) => (
+              <div key={movie.id}>
+                <Movie
+                  id={movie.id}
+                  coverImg={
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                      : ""
+                  }
+                  title={movie.title}
+                  genres={movie.genre_ids}
+                  rating={movie.vote_average}
+                />
+              </div>
+            ))}
+          </Slider>
+
+          <div>
+            <span
+              style={{ fontSize: "32px", color: "white", fontWeight: "600" }}
+            >
+              시리즈
+            </span>
+            <Slider {...settings} className={styles.flex_container}>
+              {series.map((tv) => (
+                <Movie
+                  id={tv.id}
+                  coverImg={
+                    tv.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${tv.poster_path}`
+                      : ""
+                  }
+                  title={tv.name} // TV 시리즈는 title이 아니라 name
+                  genres={tv.genre_ids}
+                  rating={tv.vote_average}
+                  linkType="series"
+                />
+              ))}
+            </Slider>
+          </div>
+        </div>
       )}
     </div>
   );

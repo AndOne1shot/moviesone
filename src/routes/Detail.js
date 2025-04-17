@@ -3,27 +3,40 @@ import { useParams } from "react-router-dom";
 import styles from "../mycss/detailpage.module.css";
 
 function Detail() {
-  const { id } = useParams();
-  const [movie, setMovie] = useState(null);
+  const { id, type } = useParams(); // type: 'movie' 또는 'series'
+  const [item, setItem] = useState(null);
   const [director, setDirector] = useState("");
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    const getMovie = async () => {
+    const getDetail = async () => {
       const apiKey = process.env.REACT_APP_TMDB_API_KEY;
-      // TMDB 상세+출연진+감독 정보 한 번에 요청
-      const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=ko-KR&append_to_response=credits`;
+      const endpoint = type === "series" ? "tv" : "movie";
+      const url = `https://api.themoviedb.org/3/${endpoint}/${id}?api_key=${apiKey}&language=ko-KR&append_to_response=credits`;
       const res = await fetch(url);
       const data = await res.json();
 
-      setMovie(data);
+      setItem(data);
 
-      // 감독 추출 (crew 중 job이 Director인 사람)
+      // 감독 추출
       if (data.credits && data.credits.crew) {
-        const directorObj = data.credits.crew.find(
-          (person) => person.job === "Director"
-        );
-        setDirector(directorObj ? directorObj.name : "");
+        let directorObj;
+        if (type === "series") {
+          // TV 시리즈는 여러 명일 수 있음
+          directorObj = data.credits.crew.filter(
+            (person) => person.job === "Director"
+          );
+          setDirector(
+            directorObj.length > 0
+              ? directorObj.map((d) => d.name).join(", ")
+              : ""
+          );
+        } else {
+          directorObj = data.credits.crew.find(
+            (person) => person.job === "Director"
+          );
+          setDirector(directorObj ? directorObj.name : "");
+        }
       }
 
       // 출연진(상위 10명만)
@@ -32,10 +45,10 @@ function Detail() {
       }
     };
 
-    getMovie();
-  }, [id]);
+    getDetail();
+  }, [id, type]);
 
-  if (!movie) {
+  if (!item) {
     return (
       <div
         style={{
@@ -55,16 +68,17 @@ function Detail() {
     <div className={styles.detail_container}>
       <img
         src={
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+          item.poster_path
+            ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
             : ""
         }
-        alt={movie.title}
+        alt={type === "series" ? item.name : item.title}
         className={styles.poster}
       />
       <div style={{ width: "900px" }}>
         <span style={{ fontSize: "36px", fontWeight: "600", color: "white" }}>
-          {movie.title} ({movie.release_date?.slice(0, 4)})
+          {type === "series" ? item.name : item.title} (
+          {(item.first_air_date || item.release_date)?.slice(0, 4)})
         </span>
         <div style={{ margin: "10px 0", color: "white" }}>
           <strong>감독:</strong> {director || "정보 없음"}
@@ -86,10 +100,10 @@ function Detail() {
             <span style={{ color: "gray" }}>출연진 정보가 없습니다.</span>
           )}
         </div>
-        <div style={{ color: "white", marginTop: "20px" }}>
-          <strong>줄거리:</strong>
-          <div>{movie.overview || "줄거리 정보가 없습니다."}</div>
-        </div>
+      </div>
+      <div style={{ color: "white", marginTop: "20px" }}>
+        <strong>줄거리:</strong>
+        <div>{item.overview || "줄거리 정보가 없습니다."}</div>
       </div>
     </div>
   );

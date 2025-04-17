@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "../mycss/mainpage.module.css";
 
-function Movie({ id, coverImg, title, rating }) {
+function Movie({ id, coverImg, title, rating, linkType = "movie" }) {
   const rate = Math.round(rating * 10);
   return (
     <div className={styles.container}>
-      <Link to={`/movie/${id}`} className={styles.link}>
+      <Link to={`/${linkType}/${id}`} className={styles.link}>
         <img src={coverImg} alt={title} className={styles.poster} />
         <div className={styles.title}>
           <span style={{ width: "70%" }}>{title}</span>
