@@ -111,7 +111,8 @@ function Detail() {
         </div>
       </div>
       <div style={{ color: "white", marginTop: "20px" }}>
-        <strong>줄거리:</strong>
+        <strong style={{ fontSize: "24px" }}>줄거리</strong>
+        <br />
         <br />
         <span>{item.overview || "줄거리 정보가 없습니다."}</span>
         <hr style={{ marginTop: "30px", marginBottom: "30px" }} />

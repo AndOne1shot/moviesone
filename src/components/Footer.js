@@ -1,29 +1,10 @@
 import React from "react";
+import "../mycss/footer.css";
 
 function Footer() {
   return (
-    <footer
-      style={{
-        padding: "20px",
-        textAlign: "center",
-        fontSize: "14px",
-        color: "#6c757d",
-        marginTop: "100px",
-      }}
-    >
-      <div style={{ marginBottom: "10px" }}>
-        <a
-          href="https://www.themoviedb.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src="https://www.themoviedb.org/assets/2/v4/logos/stacked-blue-3c7b4b7b4f6d2c6c7b4b4c2e6c6c7b4b7b4b4c2e6c6c7b4b.svg"
-            alt="TMDB Logo"
-            style={{ height: "40px" }}
-          />
-        </a>
-      </div>
+    <footer>
+      <div style={{ marginBottom: "10px" }}></div>
       <p>
         이 웹사이트는 <strong>TMDB API</strong>를 사용하여 데이터를 제공합니다.
         해당 API는{" "}

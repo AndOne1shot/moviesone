@@ -7,7 +7,6 @@ function Header() {
         <span className={style.title}>MovieOne</span>
         <div>asdasd</div>
       </div>
-      <div>asdad</div>
     </div>
   );
 }

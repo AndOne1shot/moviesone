@@ -1,0 +1,13 @@
+footer {
+  /* 푸터 기본 스타일 */
+  background-color: #0a0b0d;
+  color: #6c757d;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 100px;
+}
+
+footer a:visited {
+  color: #6c757d; /* 방문한 링크 색상 */
+}

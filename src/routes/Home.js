@@ -99,7 +99,7 @@ function Home() {
         </div>
       ) : (
         <div className={styles.flex_container}>
-          <div style={{ maxWidth: "1280px", width: "100%" }}>
+          <div className={styles.flex_container}>
             <span
               style={{ fontSize: "32px", color: "white", fontWeight: "600" }}
             >
