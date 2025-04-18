@@ -114,9 +114,41 @@ function Detail() {
         <strong>줄거리:</strong>
         <br />
         <span>{item.overview || "줄거리 정보가 없습니다."}</span>
-        <hr style={{ marginTop: "30px" }} />
+        <hr style={{ marginTop: "30px", marginBottom: "30px" }} />
         <ul className={styles.movie_info}>
-          <li></li>
+          <li>
+            <strong>장르</strong>
+            <span>
+              {item.genres && item.genres.length > 0
+                ? item.genres.map((g) => g.name).join(", ")
+                : "정보 없음"}
+            </span>
+          </li>
+          <li>
+            <strong>{type === "series" ? "방영일" : "개봉일"}</strong>
+            <span>
+              {type === "series" ? item.first_air_date : item.release_date}
+            </span>
+          </li>
+          <li>
+            <strong>러닝타임</strong>
+            <span>
+              {type === "series" ? item.episode_run_time : item.runtime}분
+            </span>
+          </li>
+          <li>
+            <strong>제작국가</strong>
+            <span>
+              {type === "series"
+                ? item.origin_country && item.origin_country.length > 0
+                  ? item.origin_country.join(", ")
+                  : "정보 없음"
+                : item.production_countries &&
+                  item.production_countries.length > 0
+                ? item.production_countries.map((c) => c.name).join(", ")
+                : "정보 없음"}
+            </span>
+          </li>
         </ul>
       </div>
     </div>

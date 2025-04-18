@@ -49,14 +49,15 @@
   width: 400px;
 }
 
-.movie-info li {
+.movie_info li {
   display: flex; /* 한 줄에 label과 값 나란히 */
   justify-content: space-between;
   padding: 8px 0;
-  border-bottom: 1px solid #222; /* 구분선 */
+  color: #d4d9e1;
 }
 
-.movie-info li strong {
+.movie_info li strong {
   width: 100px; /* label 너비 고정 */
   font-weight: bold;
+  color: #98a4b7;
 }
