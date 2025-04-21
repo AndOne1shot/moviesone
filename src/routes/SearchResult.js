@@ -13,13 +13,13 @@ function SearchResult() {
 
   useEffect(() => {
     if (!query) return;
-    const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+    const api_key = process.env.REACT_APP_TMDB_API_KEY;
     const fetchResults = async () => {
       setLoading(true);
       setError("");
       try {
         const res = await fetch(
-          `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(
+          `https://api.themoviedb.org/3/search/multi?api_key=${api_key}&query=${encodeURIComponent(
             query
           )}&language=ko-KR`
         );

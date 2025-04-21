@@ -67,9 +67,9 @@ function Home() {
       setUpcomeMovies(json.results);
     };
 
-    Promise.all([getMovies(), getSeries(), getUpcomeMovies()]).then(() =>
-      setLoading(false)
-    );
+    Promise.all([getMovies(), getSeries(), getUpcomeMovies()])
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, [apiKey]);
 
   const settings = {
