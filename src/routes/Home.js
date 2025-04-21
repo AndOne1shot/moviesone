@@ -167,7 +167,7 @@ function Home() {
                   title={tv.name} // TV 시리즈는 title이 아니라 name
                   genres={tv.genre_ids}
                   rating={tv.vote_average}
-                  linkType="series"
+                  linkType="tv"
                 />
               ))}
             </Slider>

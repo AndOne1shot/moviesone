@@ -11,7 +11,7 @@ function Detail() {
   useEffect(() => {
     const getDetail = async () => {
       const apiKey = process.env.REACT_APP_TMDB_API_KEY;
-      const endpoint = type === "series" ? "tv" : "movie";
+      const endpoint = type === "tv" ? "tv" : "movie";
       const url = `https://api.themoviedb.org/3/${endpoint}/${id}?api_key=${apiKey}&language=ko-KR&append_to_response=credits`;
       const res = await fetch(url);
       const data = await res.json();
@@ -21,7 +21,7 @@ function Detail() {
       // 감독 추출
       if (data.credits && data.credits.crew) {
         let directorObj;
-        if (type === "series") {
+        if (type === "tv") {
           // TV 시리즈는 여러 명일 수 있음
           directorObj = data.credits.crew.filter(
             (person) => person.job === "Director"
@@ -80,12 +80,12 @@ function Detail() {
               ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
               : ""
           }
-          alt={type === "series" ? item.name : item.title}
+          alt={type === "tv" ? item.name : item.title}
           className={styles.poster}
         />
         <div style={{ width: "900px" }}>
           <span style={{ fontSize: "36px", fontWeight: "600", color: "white" }}>
-            {type === "series" ? item.name : item.title} (
+            {type === "tv" ? item.name : item.title} (
             {(item.first_air_date || item.release_date)?.slice(0, 4)})
           </span>
           <div style={{ margin: "10px 0", color: "white" }}>
@@ -126,9 +126,9 @@ function Detail() {
             </span>
           </li>
           <li>
-            <strong>{type === "series" ? "방영일" : "개봉일"}</strong>
+            <strong>{type === "tv" ? "방영일" : "개봉일"}</strong>
             <span>
-              {type === "series" ? item.first_air_date : item.release_date}
+              {type === "tv" ? item.first_air_date : item.release_date}
             </span>
           </li>
           <li>
@@ -140,7 +140,7 @@ function Detail() {
           <li>
             <strong>제작국가</strong>
             <span>
-              {type === "series"
+              {type === "tv"
                 ? item.origin_country && item.origin_country.length > 0
                   ? item.origin_country.join(", ")
                   : "정보 없음"
