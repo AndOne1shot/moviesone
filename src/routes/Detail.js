@@ -110,12 +110,26 @@ function Detail() {
           </div>
         </div>
       </div>
-      <div style={{ color: "white", marginTop: "20px" }}>
+      <div
+        style={{
+          color: "white",
+          marginTop: "20px",
+          maxWidth: "1280px",
+          width: "100%",
+        }}
+      >
         <strong style={{ fontSize: "24px" }}>줄거리</strong>
         <br />
         <br />
         <span>{item.overview || "줄거리 정보가 없습니다."}</span>
-        <hr style={{ marginTop: "30px", marginBottom: "30px" }} />
+        <hr
+          style={{
+            marginTop: "30px",
+            marginBottom: "30px",
+            maxWidth: "1280px",
+            width: "100%",
+          }}
+        />
         <ul className={styles.movie_info}>
           <li>
             <strong>장르</strong>
